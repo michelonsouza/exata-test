@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "husky install",
+    "prepare": "husky install",
+    "pre-commit": "npx lint-staged -p false",
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
