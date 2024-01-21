@@ -23,10 +23,9 @@ describe('CharacterCard', () => {
     expect(sut).toBeDefined();
   });
   it('shoud be able pass optional type', () => {
-    const internalData = makeCharacter({ type: '' });
     const container = render<CharacterCardProps>(CharacterCard, {
       props: {
-        character: internalData,
+        character: { ...data, type: '' },
         index: 1,
       },
     });
@@ -36,10 +35,9 @@ describe('CharacterCard', () => {
     expect(sut.innerHTML).toEqual('Desconhecido');
   });
   it('shoud be able pass status is unknown', () => {
-    const internalData = makeCharacter({ status: CharacterStatus.UNKNOWN });
     const container = render<CharacterCardProps>(CharacterCard, {
       props: {
-        character: internalData,
+        character: { ...data, status: CharacterStatus.UNKNOWN },
         index: 1,
       },
     });
