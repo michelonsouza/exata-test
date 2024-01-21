@@ -50,6 +50,16 @@ const infos = computed(() => {
       value: props.character.species,
     },
     {
+      id: 'episodes',
+      label: 'Episódios',
+      value: props.character.episode
+        .map(episode => {
+          const url = episode.split('/');
+          return url[url.length - 1];
+        })
+        .join(', '),
+    },
+    {
       id: 'status',
       label: 'Status',
       value:
@@ -77,6 +87,7 @@ const computedDataTestId = computed(() => {
       :data-test-id="computedDataTestId"
       :infos="infos"
       :index="index"
+      :value-max-width="100"
     />
   </CardComponent>
 </template>
