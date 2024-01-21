@@ -1,4 +1,4 @@
-interface InfoType {
+export interface InfoType {
   count: number;
   pages: number;
   next: string;
