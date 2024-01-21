@@ -117,7 +117,7 @@ import { links } from './config';
   width: 100vw;
   max-width: 100vw;
   overflow-x: hidden;
-  min-height: 100dvh;
-  max-height: 100dvh;
+  min-height: 100vh;
+  max-height: 100vh;
 }
 </style>

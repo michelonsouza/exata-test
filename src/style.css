@@ -114,3 +114,7 @@ button:focus-visible {
     padding: 0 var(--spacing-normal);
   }
 }
+
+.router-link-active {
+  color: var(--color-primary-light);
+}
