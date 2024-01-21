@@ -1,0 +1,39 @@
+name: coverals
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Test
+      run: |
+        echo "VITE_APP_ENCRYPT_STORAGE_SECRET_KEY=$env:STORAGE_SECRET_KEY" > .env
+        echo "VITE_APP_ENCRYPT_STORAGE_PREFIX=$env:STORAGE_PREFIX" >> .env
+        echo "VITE_APP_NODE_ENV=$env:APP_NODE_ENV" >> .env
+        yarn install
+        yarn test:coverage
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      env:
+        NODE_COVERALLS_DEBUG: 1
+        STORAGE_SECRET_KEY: ${{ secrets.VITE_APP_ENCRYPT_STORAGE_SECRET_KEY }}
+        STORAGE_PREFIX: ${{ secrets.VITE_APP_ENCRYPT_STORAGE_PREFIX }}
+        APP_NODE_ENV: ${{ secrets.VITE_APP_NODE_ENV }}
+      with:
+        github-token: ${{ github.token }}
