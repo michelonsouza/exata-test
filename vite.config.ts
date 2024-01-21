@@ -1,14 +1,18 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
+import { fileURLToPath, URL } from 'node:url';
+
+import nodeResolve from '@rollup/plugin-node-resolve';
+import vue from '@vitejs/plugin-vue';
 import {
   defineConfig,
   loadEnv,
-  UserConfig,
+  // UserConfig,
   splitVendorChunkPlugin,
 } from 'vite';
-import { fileURLToPath, URL } from 'node:url';
-import vue from '@vitejs/plugin-vue';
 import dynamicImport from 'vite-plugin-dynamic-import';
 import tsConfigPaths from 'vite-tsconfig-paths';
-import nodeResolve from '@rollup/plugin-node-resolve';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -21,6 +25,19 @@ export default defineConfig(({ mode }) => {
       dynamicImport(),
       splitVendorChunkPlugin(),
     ],
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./setup.ts'],
+      exclude: ['node_modules', 'dist', 'build', 'coverage'],
+      css: true,
+      threads: false,
+      environmentOptions: {
+        jsdom: {
+          resources: 'usable',
+        },
+      },
+    },
     resolve: {
       alias: [
         {
