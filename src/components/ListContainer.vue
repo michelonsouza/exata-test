@@ -1,18 +1,25 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { LoadingComponent } from '@/components';
 
 export interface ListContainerProps {
   loading?: boolean;
   dataCount?: number;
+  dataTestId?: string;
 }
 
-defineProps<ListContainerProps>();
+const props = defineProps<ListContainerProps>();
+
+const computedDataTestId = computed(() => {
+  return props.dataTestId || 'list-container';
+});
 </script>
 
 <template>
   <div class="list-container">
     <LoadingComponent v-if="loading" />
-    <slot v-else></slot>
+    <slot v-else :data-testid="computedDataTestId"></slot>
   </div>
 </template>
 

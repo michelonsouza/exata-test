@@ -3,6 +3,9 @@ import { computed } from 'vue';
 
 import { Character } from '@/models';
 
+import CardComponent from './CardComponent.vue';
+import CardInfos from './CardInfos.vue';
+
 export interface CharacterCardProps {
   character: Character;
   index?: number;
@@ -61,57 +64,20 @@ const computedDataTestId = computed(() => {
 </script>
 
 <template>
-  <div
-    class="card"
+  <CardComponent
+    :index="index"
     :data-testid="`${computedDataTestId}${index !== undefined ? `-${index}` : ''}`"
   >
     <div
       class="card-image"
       :data-testid="`${computedDataTestId}-image${index !== undefined ? `-${index}` : ''}`"
       :style="{ backgroundImage: `url(${props.character.image})` }"
-    />
-    <div
-      class="card-info-container"
-      :data-testid="`${computedDataTestId}-info-container${index !== undefined ? `-${index}` : ''}`"
-    >
-      <div
-        v-for="info in infos"
-        :key="info.id"
-        class="card-info"
-        :data-testid="`${computedDataTestId}-info-${info.id}`"
-      >
-        <span
-          class="card-info-label"
-          :data-testid="`${computedDataTestId}-info-label-${info.id}`"
-          >{{ info.label }}:</span
-        >
-        <span
-          :title="info.value"
-          class="card-info-value"
-          :data-testid="`${computedDataTestId}-info-label-value-${info.id}`"
-          >{{ info.value }}</span
-        >
-      </div>
-    </div>
-  </div>
+    ></div>
+    <CardInfos :data-test-id="dataTestId" :infos="infos" :index="index" />
+  </CardComponent>
 </template>
 
 <style scoped lang="scss">
-.card {
-  overflow: hidden;
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius);
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  display: flex;
-  transition: border-color 150ms linear;
-  gap: var(--spacing-small);
-
-  &:hover {
-    border-color: var(--color-primary-dark);
-  }
-}
-
 .card-image {
   width: 40%;
   min-width: 40%;
@@ -121,28 +87,5 @@ const computedDataTestId = computed(() => {
   background-size: cover;
   background-repeat: no-repeat;
   margin-right: var(--spacing-normal);
-}
-
-.card-info-container {
-  width: 100%;
-  display: flex;
-  padding: var(--spacing-small);
-  flex-direction: column;
-  gap: var(--spacing-small);
-}
-
-.card-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.card-info-value {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 120px;
-  text-align: end;
 }
 </style>

@@ -11,6 +11,7 @@ import { InfoType as Pagination } from '@/models';
 export interface PaginationComponentProps extends Partial<Pagination> {
   page: number;
   loading?: boolean;
+  dataTestId?: string;
   onPageChange(page: number): void;
 }
 
@@ -23,7 +24,10 @@ const paginationButtons = computed(() => {
     return [1];
   }
 
-  const visiblePages = !isDesktop.value ? 3 : 5;
+  let visiblePages = !isDesktop.value ? 3 : 5;
+  if ((props?.pages || 0) < visiblePages) {
+    visiblePages = props?.pages || 0;
+  }
   let startPage = 1;
 
   if (props.page > visiblePages) {
@@ -38,28 +42,46 @@ const paginationButtons = computed(() => {
     .fill(null)
     .map((_, index) => index + startPage);
 });
+
+const computedDataTestId = computed(() => {
+  return props.dataTestId || 'pagination-component';
+});
 </script>
 
 <template>
-  <div v-if="(props?.pages || 0) < 1 || loading" />
-  <div v-else class="pagination-container">
+  <div
+    v-if="(props?.pages || 0) < 1 || loading"
+    :data-testid="`${computedDataTestId}-empty`"
+  />
+  <div v-else :data-testid="computedDataTestId" class="pagination-container">
     <button
       :disabled="page === 1"
+      :data-testid="`${computedDataTestId}-first`"
       title="Ir para primeira página"
       @click="onPageChange(1)"
     >
-      <img :src="First" alt="First icon" />
+      <img
+        :data-testid="`${computedDataTestId}-first-icon`"
+        :src="First"
+        alt="First icon"
+      />
     </button>
     <button
       title="Ir para a página anterior"
+      :data-testid="`${computedDataTestId}-prev`"
       :disabled="page === 1"
       @click="onPageChange(page - 1)"
     >
-      <img :src="Prev" alt="Prev icon" />
+      <img
+        :data-testid="`${computedDataTestId}-prev-icon`"
+        :src="Prev"
+        alt="Prev icon"
+      />
     </button>
     <button
       v-for="pageButton in paginationButtons"
       :key="pageButton"
+      :data-testid="`${computedDataTestId}-button-${pageButton}`"
       :disabled="pageButton === props.page"
       :title="`Ir para a página ${pageButton}`"
       @click="onPageChange(pageButton)"
@@ -68,6 +90,7 @@ const paginationButtons = computed(() => {
     </button>
     <button
       title="Ir para a próxima página"
+      :data-testid="`${computedDataTestId}-next`"
       :disabled="page === props.pages"
       @click="onPageChange(page + 1)"
     >
@@ -75,6 +98,7 @@ const paginationButtons = computed(() => {
     </button>
     <button
       title="Ir para última página"
+      :data-testid="`${computedDataTestId}-last`"
       :disabled="page === props.pages"
       @click="onPageChange(props.pages || props.page)"
     >

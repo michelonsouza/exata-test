@@ -1,10 +1,22 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import rick from '@/assets/rick-and-morty-portal.png';
+
+export interface LoadingComponentProps {
+  dataTestId?: string;
+}
+
+const props = defineProps<LoadingComponentProps>();
+
+const computedDataTestId = computed(() => {
+  return props.dataTestId || 'loading-component';
+});
 </script>
 
 <template>
-  <div class="loading-overlay">
-    <img :src="rick" alt="Rick" />
+  <div :data-testid="computedDataTestId" class="loading-overlay">
+    <img :data-testid="`${computedDataTestId}-image`" :src="rick" alt="Rick" />
   </div>
 </template>
 

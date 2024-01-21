@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 export interface PageWrapperProps {
   title: string;
+  dataTestId?: string;
 }
 
-defineProps<{
-  title: string;
-}>();
+const props = defineProps<PageWrapperProps>();
+
+const computedDataTestId = computed(() => {
+  return props?.dataTestId || 'page-wrapper';
+});
 </script>
 
 <template>
-  <div class="page-wrapper-container">
-    <h1>{{ title }}</h1>
+  <div :data-testid="computedDataTestId" class="page-wrapper-container">
+    <h1 :data-testid="`${computedDataTestId}-title`">{{ title }}</h1>
     <slot></slot>
   </div>
 </template>
