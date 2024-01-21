@@ -29,8 +29,9 @@ import rick from '@/assets/rick-and-morty-portal.png';
   background-color: rgba(0, 0, 0, 0.5);
 
   & img {
-    width: 300px;
-    height: 300px;
+    width: 340px;
+    height: 340px;
+    max-width: 96%;
     animation: rotate 2s linear infinite;
   }
 }

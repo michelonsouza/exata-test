@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
-import { Loading } from '@/components';
+import { LoadingComponent } from '@/components';
 
-defineProps<{ loading?: boolean }>();
+defineProps<{ loading?: boolean; dataCount?: number }>();
 </script>
 
 <template>
   <div class="list-container">
-    <Loading v-if="loading" />
+    <LoadingComponent v-if="loading" />
     <slot v-else></slot>
   </div>
 </template>
