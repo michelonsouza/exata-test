@@ -38,6 +38,7 @@ function onPageChange(newPage: number) {
         :key="character.id"
         :index="index"
         :character="character"
+        data-testid="character"
       />
     </ListContainer>
     <PaginationComponent
