@@ -22,6 +22,7 @@
   },
   "plugins": ["vue", "@typescript-eslint", "import", "prettier"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": "error",
     "vue/require-default-prop": "off",
     "vue/no-multiple-template-root": "off",
@@ -30,41 +31,41 @@
     "import/prefer-default-export": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          "varsIgnorePattern": "^_",
-          "argsIgnorePattern": "^_"
-        }
-      ],
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          "ts": "never",
-          "tsx": "never",
-          "jsx": "never",
-          "vue": "never"
-        }
-      ],
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "jsx": "never",
+        "vue": "never"
+      }
+    ],
     "import/order": [
-        "error",
-        {
-          "groups": ["builtin", "external", "internal"],
-          "pathGroups": [
-            {
-              "pattern": "vue",
-              "group": "external",
-              "position": "before"
-            }
-          ],
-          "pathGroupsExcludedImportTypes": ["vue"],
-          "newlines-between": "always",
-          "alphabetize": {
-            "order": "asc",
-            "caseInsensitive": true
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "vue",
+            "group": "external",
+            "position": "before"
           }
+        ],
+        "pathGroupsExcludedImportTypes": ["vue"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
         }
-      ]
+      }
+    ]
   },
   "settings": {
     "import/resolver": {

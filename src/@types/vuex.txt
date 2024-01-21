@@ -1,4 +1,5 @@
 import { ComponentCustomProperties } from 'vue';
+
 import { Store } from 'vuex';
 
 import { User } from '@/models';

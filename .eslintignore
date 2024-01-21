@@ -7,8 +7,10 @@ src/__tests__/**
 *.svg
 *.png
 *.jpeg
+*.avif
 *.jpg
 *.otf
 *.gql
 *.css
 *.md
+*.txt
