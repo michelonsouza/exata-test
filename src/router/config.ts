@@ -1,25 +1,25 @@
 import { RouteRecordRaw } from 'vue-router';
 
-const Home = () => import('@/pages/Home.vue');
-const Characters = () => import('@/pages/Characters.vue');
-const Locations = () => import('@/pages/Locations.vue');
-const Episodes = () => import('@/pages/Episodes.vue');
+const HomePage = () => import('@/pages/HomePage.vue');
+const CharactersPage = () => import('@/pages/CharactersPage.vue');
+const LocationsPage = () => import('@/pages/LocationsPage.vue');
+const EpisodesPage = () => import('@/pages/EpisodesPage.vue');
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: Home,
+    component: HomePage,
   },
   {
     path: '/characters',
-    component: Characters,
+    component: CharactersPage,
   },
   {
     path: '/locations',
-    component: Locations,
+    component: LocationsPage,
   },
   {
     path: '/episodes',
-    component: Episodes,
+    component: EpisodesPage,
   },
 ];
