@@ -101,6 +101,7 @@ import { links } from './config';
 
 .main-content {
   padding-top: var(--spacing-large);
+  padding-bottom: var(--spacing-large);
 }
 
 .links-container {
