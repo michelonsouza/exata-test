@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+export interface PageWrapperProps {
+  title: string;
+}
 
 defineProps<{
   title: string;

@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 
 import { Character } from '@/models';
 
-const props = defineProps<{ character: Character; index?: number }>();
+export interface CharacterCardProps {
+  character: Character;
+  index?: number;
+  dataTestId?: string;
+}
+
+const props = defineProps<CharacterCardProps>();
 
 const gender = {
   Male: 'Masculino',
@@ -48,37 +54,41 @@ const infos = computed(() => {
     },
   ];
 });
+
+const computedDataTestId = computed(() => {
+  return props.dataTestId || 'character-card';
+});
 </script>
 
 <template>
   <div
     class="card"
-    :data-testid="`character-card${index !== undefined ? `-${index}` : ''}`"
+    :data-testid="`${computedDataTestId}${index !== undefined ? `-${index}` : ''}`"
   >
     <div
       class="card-image"
-      :data-testid="`character-card-image${index !== undefined ? `-${index}` : ''}`"
+      :data-testid="`${computedDataTestId}-image${index !== undefined ? `-${index}` : ''}`"
       :style="{ backgroundImage: `url(${props.character.image})` }"
     />
     <div
       class="card-info-container"
-      :data-testid="`character-card-info-container${index !== undefined ? `-${index}` : ''}`"
+      :data-testid="`${computedDataTestId}-info-container${index !== undefined ? `-${index}` : ''}`"
     >
       <div
         v-for="info in infos"
         :key="info.id"
         class="card-info"
-        :data-testid="`character-card-info-${index}`"
+        :data-testid="`${computedDataTestId}-info-${info.id}`"
       >
         <span
           class="card-info-label"
-          :data-testid="`character-card-info-label-${index}`"
+          :data-testid="`${computedDataTestId}-info-label-${info.id}`"
           >{{ info.label }}:</span
         >
         <span
           :title="info.value"
           class="card-info-value"
-          :data-testid="`character-card-info-label-value-${index}`"
+          :data-testid="`${computedDataTestId}-info-label-value-${info.id}`"
           >{{ info.value }}</span
         >
       </div>

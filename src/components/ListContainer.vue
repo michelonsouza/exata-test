@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 import { LoadingComponent } from '@/components';
 
-defineProps<{ loading?: boolean; dataCount?: number }>();
+export interface ListContainerProps {
+  loading?: boolean;
+  dataCount?: number;
+}
+
+defineProps<ListContainerProps>();
 </script>
 
 <template>

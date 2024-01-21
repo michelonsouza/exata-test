@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 
 import Prev from '@/assets/icons/chevron_left.svg';
 import Next from '@/assets/icons/chevron_right.svg';
@@ -8,7 +8,7 @@ import First from '@/assets/icons/prev.svg';
 import { useMediaQuery } from '@/composables';
 import { InfoType as Pagination } from '@/models';
 
-interface Props extends Partial<Pagination> {
+export interface PaginationComponentProps extends Partial<Pagination> {
   page: number;
   loading?: boolean;
   onPageChange(page: number): void;
@@ -16,7 +16,7 @@ interface Props extends Partial<Pagination> {
 
 const { isDesktop } = useMediaQuery();
 
-const props = defineProps<Props>();
+const props = defineProps<PaginationComponentProps>();
 
 const paginationButtons = computed(() => {
   if (props?.pages === 1) {
