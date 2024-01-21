@@ -53,7 +53,7 @@ const computedDataTestId = computed(() => {
     :data-test-id="`${computedDataTestId}${index !== undefined ? `-${index}` : ''}`"
   >
     <CardInfos
-      :data-test-id="dataTestId"
+      :data-test-id="computedDataTestId"
       :infos="infos"
       :index="index"
       :value-max-width="150"

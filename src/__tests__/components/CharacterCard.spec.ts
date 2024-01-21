@@ -38,7 +38,6 @@ describe('CharacterCard', () => {
     const container = render<CharacterCardProps>(CharacterCard, {
       props: {
         character: { ...data, status: CharacterStatus.UNKNOWN },
-        index: 1,
       },
     });
 

@@ -59,21 +59,25 @@ const infos = computed(() => {
 });
 
 const computedDataTestId = computed(() => {
-  return props.dataTestId || 'character-card';
+  return props?.dataTestId || 'character-card';
 });
 </script>
 
 <template>
   <CardComponent
     :index="index"
-    :data-testid="`${computedDataTestId}${index !== undefined ? `-${index}` : ''}`"
+    :data-test-id="`${computedDataTestId}${index !== undefined ? `-${index}` : ''}`"
   >
     <div
       class="card-image"
       :data-testid="`${computedDataTestId}-image${index !== undefined ? `-${index}` : ''}`"
       :style="{ backgroundImage: `url(${props.character.image})` }"
     ></div>
-    <CardInfos :data-test-id="dataTestId" :infos="infos" :index="index" />
+    <CardInfos
+      :data-test-id="computedDataTestId"
+      :infos="infos"
+      :index="index"
+    />
   </CardComponent>
 </template>
 
