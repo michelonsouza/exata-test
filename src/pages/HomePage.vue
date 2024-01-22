@@ -14,13 +14,18 @@ const tooling = [
   },
   {
     id: 'axios',
-    name: 'axios',
+    name: 'Axios',
     href: 'https://axios-http.com/',
   },
   {
     id: 'vee-validate',
     name: 'Vee Validate',
     href: 'https://vee-validate.logaretm.com/v4',
+  },
+  {
+    id: 'yup',
+    name: 'YupJS',
+    href: 'https://github.com/jquense/yup',
   },
 ];
 </script>

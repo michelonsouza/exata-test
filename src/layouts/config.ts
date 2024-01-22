@@ -15,8 +15,18 @@ export const links = [
     label: 'Episódios',
   },
   {
-    id: 'route:episodes',
+    id: 'route:favorites',
     path: '/favorites',
     label: 'Lista de favoritos',
+  },
+  {
+    id: 'route:nps',
+    path: '/nps',
+    label: 'Pesquisa de satisfação',
+  },
+  {
+    id: 'route:nps:list',
+    path: '/nps-list',
+    label: 'Avaliações',
   },
 ];

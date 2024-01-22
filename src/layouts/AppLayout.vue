@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 
 import { RouterView, RouterLink } from 'vue-router';
 
@@ -19,6 +19,20 @@ const computedFooter = computed(() => {
 const toggleOpen = () => {
   open.value = !open.value;
 };
+
+function closeMenu(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    open.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keyup', closeMenu);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keyup', closeMenu);
+});
 </script>
 
 <template>

@@ -5,6 +5,8 @@ const CharactersPage = () => import('@/pages/CharactersPage.vue');
 const LocationsPage = () => import('@/pages/LocationsPage.vue');
 const EpisodesPage = () => import('@/pages/EpisodesPage.vue');
 const FavoritesPage = () => import('@/pages/FavoritesPage.vue');
+const NpsPage = () => import('@/pages/NpsPage.vue');
+const NpsListPage = () => import('@/pages/NpsListPage.vue');
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -26,5 +28,13 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/favorites',
     component: FavoritesPage,
+  },
+  {
+    path: '/nps',
+    component: NpsPage,
+  },
+  {
+    path: '/nps-list',
+    component: NpsListPage,
   },
 ];
