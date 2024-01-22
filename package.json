@@ -13,6 +13,7 @@
     "pre-commit": "npx lint-staged -p false",
     "pre-push": "npm run test",
     "test": "vitest run",
+    "test:watch": "npm run test -- --watch",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
     "test:ui:coverage": "npm run test:ui -- --coverage.enabled=true",

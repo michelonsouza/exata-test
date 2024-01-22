@@ -111,7 +111,9 @@ const toggleWishList = () => {
   >
     <button
       :title="toggleButtonTitle"
-      class="whish-list"
+      :class="{ 'whish-list': true, 'whish-list-active': isInWishList }"
+      :data-testid="`${computedDataTestId}-toggle-favorite${index !== undefined ? `-${index}` : ''}`"
+      type="button"
       @click="toggleWishList"
     >
       <img :src="icon" />

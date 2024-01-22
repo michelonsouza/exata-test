@@ -9,6 +9,7 @@ describe('LoadingComponent', () => {
   beforeEach(() => {
     dataTestId = faker.lorem.slug();
   });
+
   it('shoud be able render component', () => {
     const container = render<LoadingComponentProps>(LoadingComponent, {
       props: {
@@ -20,6 +21,14 @@ describe('LoadingComponent', () => {
 
     expect(sut).toBeDefined();
   });
+  it('shoud be able get component without dataTestId', () => {
+    const container = render<LoadingComponentProps>(LoadingComponent);
+
+    const sut = container.getByTestId('loading-component');
+
+    expect(sut).toBeDefined();
+  });
+
   it('shoud be able render component image', () => {
     const dataTestId = faker.lorem.slug();
     const container = render<LoadingComponentProps>(LoadingComponent, {

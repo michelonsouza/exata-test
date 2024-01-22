@@ -14,6 +14,7 @@ export { default as PaginationComponent } from './PaginationComponent.vue';
 export { default as TextareaComponent } from './TextareaComponent.vue';
 
 // Props
+export type { BannerComponentProps } from './BannerComponent.vue';
 export type { CardProps } from './CardComponent.vue';
 export type { CharacterCardProps } from './CharacterCard.vue';
 export type { EpisodeCardProps } from './EpisodeCard.vue';

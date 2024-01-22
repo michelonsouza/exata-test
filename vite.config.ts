@@ -8,7 +8,7 @@ import vue from '@vitejs/plugin-vue';
 import {
   defineConfig,
   loadEnv,
-  // UserConfig,
+  UserConfig,
   splitVendorChunkPlugin,
 } from 'vite';
 import dynamicImport from 'vite-plugin-dynamic-import';
@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: 'jsdom',
+      testTimeout: 6000,
       setupFiles: ['./setup.ts'],
       exclude: ['node_modules', 'dist', 'build', 'coverage'],
       css: true,
@@ -36,6 +37,29 @@ export default defineConfig(({ mode }) => {
         jsdom: {
           resources: 'usable',
         },
+      },
+      coverage: {
+        exclude: [
+          'node_modules',
+          'dist',
+          'build',
+          'coverage',
+          'src/App.vue',
+          'src/main.ts',
+          'src/vite-env.d.ts',
+          'src/shims-vue.d.ts',
+          'src/assets',
+          'src/services',
+          'src/validations',
+          'src/composables',
+          'src/@types',
+          'src/layouts',
+          'src/models',
+          'src/pages',
+          'src/router',
+          'src/store',
+          'src/utils',
+        ],
       },
     },
     resolve: {
@@ -61,5 +85,5 @@ export default defineConfig(({ mode }) => {
         }),
       ],
     },
-  };
+  } as unknown as UserConfig;
 });

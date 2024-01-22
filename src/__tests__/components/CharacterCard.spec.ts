@@ -1,4 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
+
 import { render, makeCharacter } from '@/utils/test-utils';
 import { Character } from '@/models';
 
@@ -11,6 +12,7 @@ describe('CharacterCard', () => {
   beforeEach(() => {
     data = makeCharacter();
   });
+
   it('shoud be able render component', () => {
     const container = render<CharacterCardProps>(CharacterCard, {
       props: {
@@ -22,6 +24,7 @@ describe('CharacterCard', () => {
 
     expect(sut).toBeDefined();
   });
+
   it('shoud be able pass optional type', () => {
     const container = render<CharacterCardProps>(CharacterCard, {
       props: {
@@ -34,6 +37,7 @@ describe('CharacterCard', () => {
 
     expect(sut.innerHTML).toEqual('Desconhecido');
   });
+
   it('shoud be able pass status is unknown', () => {
     const container = render<CharacterCardProps>(CharacterCard, {
       props: {
@@ -45,6 +49,7 @@ describe('CharacterCard', () => {
 
     expect(sut.innerHTML).toEqual('Desconhecido');
   });
+
   it('shoud be able pass dataTestId prop', () => {
     const dataTestId = faker.lorem.slug();
     const container = render<CharacterCardProps>(CharacterCard, {
