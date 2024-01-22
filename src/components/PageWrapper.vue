@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 export interface PageWrapperProps {
-  title: string;
+  title?: string;
   dataTestId?: string;
 }
 
@@ -15,7 +15,9 @@ const computedDataTestId = computed(() => {
 
 <template>
   <div :data-testid="computedDataTestId" class="page-wrapper-container">
-    <h1 :data-testid="`${computedDataTestId}-title`">{{ title }}</h1>
+    <h1 v-if="!!title" :data-testid="`${computedDataTestId}-title`">
+      {{ title }}
+    </h1>
     <slot></slot>
   </div>
 </template>

@@ -2,6 +2,7 @@
 export { default as BannerComponent } from './BannerComponent.vue';
 export { default as CardComponent } from './CardComponent.vue';
 export { default as CharacterCard } from './CharacterCard.vue';
+export { default as EmptyState } from './EmptyState.vue';
 export { default as EpisodeCard } from './EpisodeCard.vue';
 export { default as ListContainer } from './ListContainer.vue';
 export { default as LoadingComponent } from './LoadingComponent.vue';
