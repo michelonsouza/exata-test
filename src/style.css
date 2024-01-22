@@ -33,6 +33,7 @@
   --spacing-large: 1.5rem;
   --spacing-x-large: 2rem;
   --spacing-xx-large: 2.5rem;
+  --spacing-xxx-large: 4rem;
 
   /* border-radius */
   --radius: 4px;
@@ -53,6 +54,11 @@ a {
 
 a:hover {
   color: var(--color-primary-dark);
+}
+
+ul,
+ol {
+  list-style: none;
 }
 
 body {
