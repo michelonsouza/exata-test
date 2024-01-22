@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import whishlistedIcon from '@/assets/icons/heart_fullfiled.svg';
+import unWhishlistedIcon from '@/assets/icons/heart_outline.svg';
 import { Character } from '@/models';
+import { useStore } from '@/store';
+import { ActionEnums } from '@/store/modules/wish-list/types';
 
 import CardComponent from './CardComponent.vue';
 import CardInfos from './CardInfos.vue';
@@ -11,6 +15,8 @@ export interface CharacterCardProps {
   index?: number;
   dataTestId?: string;
 }
+
+const store = useStore();
 
 const props = defineProps<CharacterCardProps>();
 
@@ -71,6 +77,31 @@ const infos = computed(() => {
 const computedDataTestId = computed(() => {
   return props?.dataTestId || 'character-card';
 });
+
+const isInWishList = computed(() => {
+  return !!store?.state?.whishList?.characters?.find(
+    char => char.id === props.character.id,
+  );
+});
+
+const toggleButtonTitle = computed(() => {
+  return isInWishList.value
+    ? `Remover ${props.character.name} da lista`
+    : `Adicionar ${props.character.name} a lista`;
+});
+
+const icon = computed(() => {
+  return isInWishList.value ? whishlistedIcon : unWhishlistedIcon;
+});
+
+const toggleWishList = () => {
+  store.dispatch(
+    isInWishList.value
+      ? ActionEnums.ACTION_REMOVE_FROM_WISH_LIST
+      : ActionEnums.ACTION_ADD_TO_WISH_LIST,
+    props.character,
+  );
+};
 </script>
 
 <template>
@@ -78,6 +109,13 @@ const computedDataTestId = computed(() => {
     :index="index"
     :data-test-id="`${computedDataTestId}${index !== undefined ? `-${index}` : ''}`"
   >
+    <button
+      :title="toggleButtonTitle"
+      class="whish-list"
+      @click="toggleWishList"
+    >
+      <img :src="icon" />
+    </button>
     <div
       class="card-image"
       :data-testid="`${computedDataTestId}-image${index !== undefined ? `-${index}` : ''}`"
@@ -93,6 +131,22 @@ const computedDataTestId = computed(() => {
 </template>
 
 <style scoped lang="scss">
+.whish-list {
+  position: absolute;
+  z-index: 12;
+  padding: 0;
+  border: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  outline: 0;
+
+  & > img {
+    width: 40px;
+    height: 40px;
+  }
+}
 .card-image {
   width: 40%;
   min-width: 40%;

@@ -31,6 +31,7 @@ const computedDataTestId = computed(() => {
   display: flex;
   transition: border-color 150ms linear;
   gap: var(--spacing-small);
+  position: relative;
 
   &:hover {
     border-color: var(--color-primary-dark);
