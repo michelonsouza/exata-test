@@ -11,6 +11,6 @@ export const mutations: Mutations = {
   },
   [ActionEnums.MUTATE_REMOVE_FROM_NPS_LIST]: (state, nps: Nps) => {
     state.npss = state.npss.filter(c => c.id !== nps.id);
-    encryptStorage.setItem('whish-list', state.npss);
+    encryptStorage.setItem('nps-list', state.npss);
   },
 };

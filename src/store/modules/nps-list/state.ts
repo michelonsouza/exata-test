@@ -1,10 +1,10 @@
-import { Character } from '@/models';
+import { Nps } from '@/models';
 import { encryptStorage } from '@/utils';
 
-import type { WishListState } from './types';
+import type { NpsState } from './types';
 
-const prevState = encryptStorage.getItem<Character[]>('whish-list') || [];
+const prevState = encryptStorage.getItem<Nps[]>('nps-list') || [];
 
-export const state: WishListState = {
-  characters: prevState,
+export const state: NpsState = {
+  npss: prevState,
 };
