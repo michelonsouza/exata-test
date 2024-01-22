@@ -233,7 +233,10 @@ onUnmounted(() => {
   transition: all 300ms linear;
 }
 
-.slide-fade-enter-from,
+.slide-fade-enter-from {
+  transform: translateX(-20px);
+  opacity: 0;
+}
 .slide-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
