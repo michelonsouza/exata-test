@@ -4,6 +4,7 @@ const HomePage = () => import('@/pages/HomePage.vue');
 const CharactersPage = () => import('@/pages/CharactersPage.vue');
 const LocationsPage = () => import('@/pages/LocationsPage.vue');
 const EpisodesPage = () => import('@/pages/EpisodesPage.vue');
+const FavoritesPage = () => import('@/pages/FavoritesPage.vue');
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -21,5 +22,9 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/episodes',
     component: EpisodesPage,
+  },
+  {
+    path: '/favorites',
+    component: FavoritesPage,
   },
 ];

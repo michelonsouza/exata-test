@@ -1,9 +1,24 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue';
+
 import { RouterView, RouterLink } from 'vue-router';
 
+import menu from '@/assets/icons/menu.svg';
 import logo from '@/assets/rick.png';
+import { useMediaQuery } from '@/composables';
 
 import { links } from './config';
+
+const { isDesktop } = useMediaQuery();
+const open = ref<boolean>(false);
+
+const computedFooter = computed(() => {
+  return window.innerHeight - 50;
+});
+
+const toggleOpen = () => {
+  open.value = !open.value;
+};
 </script>
 
 <template>
@@ -13,10 +28,35 @@ import { links } from './config';
         <RouterLink to="/">
           <img class="logo" :src="logo" alt="Rick and Morty logo" />
         </RouterLink>
-        <div class="links-container">
+        <div v-if="isDesktop" class="links-container">
           <RouterLink v-for="link in links" :key="link.id" :to="link.path">
             {{ link.label }}
           </RouterLink>
+        </div>
+        <div v-else>
+          <Transition key="overlay" mode="out-in" name="slide-fade">
+            <div
+              v-if="open"
+              role="presentation"
+              class="overlay"
+              @click="toggleOpen"
+            >
+              <Transition key="sidenav" mode="out-in" name="slide-right">
+                <div v-if="open" class="sidenav">
+                  <RouterLink
+                    v-for="link in links"
+                    :key="link.id"
+                    :to="link.path"
+                  >
+                    {{ link.label }}
+                  </RouterLink>
+                </div>
+              </Transition>
+            </div>
+          </Transition>
+          <button @click="toggleOpen">
+            <img :src="menu" alt="menu" />
+          </button>
         </div>
       </div>
     </header>
@@ -27,33 +67,42 @@ import { links } from './config';
         </Transition>
       </RouterView>
     </div>
+    <footer
+      class="header-container footer-container"
+      :style="`top: ${computedFooter}px`"
+    >
+      <div class="container">
+        <p>
+          &copy; {{ new Date().getFullYear() }} All rights reserved Adult Swin
+          &trade;
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
 
 <style scoped lang="scss">
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-.slide-fade-enter-active {
-  transition: all 300ms linear;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 12;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.slide-fade-leave-active {
-  transition: all 300ms linear;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
+.sidenav {
+  width: 30vh;
+  height: 100vh;
+  background-color: var(--color-black);
+  display: flex;
+  position: absolute;
+  right: 0;
+  z-index: 13;
+  flex-direction: column;
+  gap: var(--spacing-normal);
+  padding: var(--spacing-normal);
 }
 .nav {
   display: flex;
@@ -99,9 +148,39 @@ import { links } from './config';
   }
 }
 
+.footer-container {
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  height: 50px;
+
+  & p {
+    text-align: center;
+  }
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      #060606,
+      var(--color-primary) 25%,
+      var(--color-primary-light) 49%,
+      var(--color-primary-dark) 73%,
+      #060606
+    );
+    background-size: 400% 400%;
+    animation: gradient 4s ease infinite;
+  }
+}
+
 .main-content {
   padding-top: var(--spacing-large);
-  padding-bottom: var(--spacing-large);
+  padding-bottom: var(--spacing-xxx-large);
 }
 
 .links-container {
@@ -119,5 +198,42 @@ import { links } from './config';
   overflow-x: hidden;
   min-height: 100vh;
   max-height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.slide-fade-enter-active {
+  transition: all 300ms linear;
+}
+
+.slide-fade-leave-active {
+  transition: all 300ms linear;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.slide-right-enter-active {
+  transition: all 300ms linear;
+}
+
+.slide-right-leave-active {
+  transition: all 300ms linear;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(30vh);
 }
 </style>

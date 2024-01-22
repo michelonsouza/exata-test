@@ -14,4 +14,9 @@ export const links = [
     path: '/episodes',
     label: 'Episódios',
   },
+  {
+    id: 'route:episodes',
+    path: '/favorites',
+    label: 'Lista de favoritos',
+  },
 ];
