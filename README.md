@@ -57,3 +57,41 @@ or
 ```bash
 yarn dev
 ```
+
+## Run tests
+
+1. All tests
+
+```bash
+npm run test
+```
+
+or
+
+```bash
+yarn test
+```
+
+2. Visual tests
+
+```bash
+npm run test:ui
+```
+
+or
+
+```bash
+yarn test:ui
+```
+
+3. With coverage
+
+```bash
+npm run test:coverage
+```
+
+or
+
+```bash
+yarn test:coverage
+```

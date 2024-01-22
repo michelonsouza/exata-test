@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NpsCard, ListContainer, PageWrapper } from '@/components';
+import { NpsCard, ListContainer, PageWrapper, EmptyState } from '@/components';
 import { useStore } from '@/store';
 
 const store = useStore();
@@ -7,7 +7,7 @@ const store = useStore();
 
 <template>
   <PageWrapper title="Avaliações">
-    <ListContainer>
+    <ListContainer v-if="!!store.state.npsList.npss.length">
       <NpsCard
         v-for="(nps, index) in store.state.npsList.npss"
         :key="nps.id"
@@ -16,5 +16,6 @@ const store = useStore();
         data-testid="nps"
       />
     </ListContainer>
+    <EmptyState v-else />
   </PageWrapper>
 </template>
